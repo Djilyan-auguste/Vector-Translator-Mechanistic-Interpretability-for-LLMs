@@ -95,8 +95,8 @@ We test whether mean-difference directions extracted from P1 activations are cau
 Requirements: Python 3.10+, PyTorch 2.0+, and the packages listed in `requirements.txt`.
 
 ```bash
-git clone https://github.com/Djilyan-auguste/traducteur-vectoriel.git
-cd traducteur-vectoriel
+git clone https://github.com/Djilyan-auguste/Vector-Translator-Mechanistic-Interpretability-for-LLMs.git
+cd Vector-Translator-Mechanistic-Interpretability-for-LLMs
 pip install -r requirements.txt
 ```
 
@@ -170,11 +170,11 @@ Runs activation steering experiments and outputs causal effect curves.
 If you use this work in your research, please cite:
 
 ```bibtex
-@misc{traducteur-vectoriel,
+@misc{vector-translator,
   author = {Lempereur, Auguste},
-  title = {Traducteur Vectoriel: Decoding Hidden Concepts from GPT-2 Activations},
+  title = {Vector Translator: Decoding Hidden Concepts from GPT-2 Activations},
   year = {2026},
-  howpublished = {\url{https://github.com/Djilyan-auguste/traducteur-vectoriel}}
+  howpublished = {\url{https://github.com/Djilyan-auguste/Vector-Translator-Mechanistic-Interpretability-for-LLMs}}
 }
 ```
 
