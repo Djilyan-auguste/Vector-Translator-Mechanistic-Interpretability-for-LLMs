@@ -22,6 +22,9 @@ We project the residual stream at each transformer layer onto the vocabulary usi
 
 Rank percentile is used in preference to raw probability because GPT-2 small rarely assigns high absolute probabilities to correct tokens; a "good" prediction typically has probability below 0.01%. Rank percentile remains interpretable across model scales.
 
+![Logit lens heatmap](figures/logit_lens_5_2___2__.png)
+*Figure: Layer-by-layer rank percentile for the prompt "2+2=". The true token "4" crystallizes at layer 6.*
+
 ### P2 — Linear Probes: Decoding Concepts from Activations
 
 Using spaCy NER and POS tagging, we construct a dataset of 911 tokens labeled with 10 semantic concepts. Linear probes are trained on residual stream activations (`resid_post`) from each layer. Layer 6 yields the best performance:
@@ -48,6 +51,9 @@ Per-concept performance at layer 6:
 
 The zero scores for PERSON and GPE are a dataset limitation (the test split of ~180 tokens contained no positive examples for these rare concepts), not a model failure. Scaling the dataset would resolve this.
 
+![F1 by layer](figures/p2_f1_by_layer.png)
+*Figure: Macro F1 across layers. Layer 6 maximizes decodability.*
+
 ### P3 — MLP Translator: Non-linear Decoding
 
 An MLP with architecture 768 → 128 → 10 (ReLU, Dropout 0.2, BCEWithLogitsLoss) is trained with early stopping (patience 5, stopping at epoch 16). The MLP slightly outperforms the linear probe:
@@ -58,6 +64,9 @@ An MLP with architecture 768 → 128 → 10 (ReLU, Dropout 0.2, BCEWithLogitsLos
 | MLP ReLU (P3) | 99,722 | 0.814 | 0.930 | 0.841 |
 
 The gain of +1.4% macro F1 is marginal on 911 tokens, but the direction is confirmed: non-linearity improves decoding when the dataset is sufficiently large. With 50k tokens, the gap would likely widen to 5–10%.
+
+![MLP vs Linear](figures/p3_mlp_vs_linear.png)
+*Figure: Per-concept F1 comparison. MLP (red) outperforms linear probe (blue) on 6/10 concepts.*
 
 ### P4 — Activation Steering: Causal Validation (Negative Result)
 
@@ -73,6 +82,9 @@ We test whether mean-difference directions extracted from P1 activations are cau
 | ORG | 0.0004 | 0.0004 | 0.0005 | +0.0001 | None |
 
 **Result:** Mean-difference directions are correlational, not causal. They capture where concept tokens tend to cluster in activation space, but this cluster is not a steerable direction. This is a real negative result: it confirms that decoding (P2/P3) and control (P4) are distinct problems, and points to future work using adversarial contrast pairs, PCA, and orthogonalization as in refusal direction research [Arditi et al., 2024].
+
+![Steering results](figures/p4_steering_results.png)
+*Figure: Activation steering curves. Flat lines confirm mean-diff directions are not causal.*
 
 ---
 
