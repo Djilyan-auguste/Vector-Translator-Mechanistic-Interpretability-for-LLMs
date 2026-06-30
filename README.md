@@ -1,5 +1,7 @@
 # Vector Translator
 
+**[Live Demo](https://huggingface.co/spaces/djilyn/Vector-Translator)** — Interactive GPT-2 logit lens visualization
+
 A mechanistic interpretability research project that extracts, decodes, and tests causal control of semantic concepts from the internal activations of GPT-2 small (124M parameters).
 
 The project proceeds through five phases: (P0) identifying the decision layer via logit lens analysis; (P1–P2) building a labeled dataset and training linear probes to decode concepts from residual stream activations; (P3) training a non-linear MLP translator and comparing its performance to linear baselines; and (P4) testing whether extracted concept directions are causally steerable via activation steering.
