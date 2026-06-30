@@ -171,7 +171,7 @@ If you use this work in your research, please cite:
 
 ```bibtex
 @misc{vector-translator,
-  author = {Lempereur, Auguste},
+  author = {Auguste, Djilyan},
   title = {Vector Translator: Decoding Hidden Concepts from GPT-2 Activations},
   year = {2026},
   howpublished = {\url{https://github.com/Djilyan-auguste/Vector-Translator-Mechanistic-Interpretability-for-LLMs}}
